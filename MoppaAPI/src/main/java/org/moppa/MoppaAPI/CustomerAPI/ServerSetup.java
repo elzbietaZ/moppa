@@ -38,6 +38,7 @@ public class ServerSetup {
       Logger.getLogger(ServerSetup.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
+  
 
   public static ResourceConfig createApp() {
     return new ResourceConfig()
