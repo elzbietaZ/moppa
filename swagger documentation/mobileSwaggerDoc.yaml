@@ -1,0 +1,99 @@
+swagger: '2.0'
+info:
+  title: Moppa Mobile API
+  version: 0.0.1
+host: moppa.io
+schemes:
+  - http
+basePath: /v1/tasks
+produces:
+  - application/json
+paths:
+  /getTask:
+    get:
+      summary: getting task
+      description: |
+        getTask endpoint returns task description and id of the task.
+      parameters:
+        - name: device_id
+          in: query
+          required: true
+          type: string
+          description: Unique device identifier.
+      responses:
+        '200':
+          description: ok
+          schema:
+            $ref: '#/definitions/Task'
+        '400':
+          description: error, bad request
+          schema:
+            type: object
+            properties:
+              errorDescription:
+                type: string
+  /saveResultTasks:
+    post:
+      summary: saving result of the task
+      description: |
+        returns id and result
+      parameters:
+        - name: task_result
+          in: body
+          description: Result of multiplication.
+          required: true
+          schema:
+            $ref: '#/definitions/TaskResult'
+      responses:
+        '200':
+          description: result recived correct
+          schema:
+            type: object
+            required:
+              - status
+            properties:
+              status:
+                type: string
+        '400':
+          description: error, bad request
+          schema:
+            type: object
+            properties:
+              errorDescription:
+                type: string
+definitions:
+  Task:
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      task_def:
+        $ref: '#/definitions/FactorialTaskDef'
+  
+  FactorialTaskDef:
+    type: object
+    properties:
+      start:
+        type: integer
+      finish:
+        type: integer
+    
+  TaskResult:
+    type: object
+    properties:
+      type:
+        type: string
+      task_id:
+        type: string
+      device_id:
+        type: string
+      result:
+        $ref: '#/definitions/FactorialTaskResult'
+        
+  FactorialTaskResult:
+    type: object
+    properties:
+      result:
+        type: string
