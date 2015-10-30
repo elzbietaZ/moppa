@@ -16,7 +16,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 public class ServerSetup {
 
-  private static final URI BASE_URI = URI.create("http://localhost:8080/moppa/");
+  private static final URI BASE_URI = URI.create("http://localhost:8080/MoppaCustomerAPI");
 
   public static void main(String[] args) {
     try {
@@ -25,8 +25,8 @@ public class ServerSetup {
       beanConfig.setScan(true);
       beanConfig.setResourcePackage(Authentication.class.getPackage().getName());
       beanConfig.setBasePath(BASE_URI.toString());
-      beanConfig.setDescription("Hello resources");
-      beanConfig.setTitle("Hello API");
+      beanConfig.setDescription("Tasks resources");
+      beanConfig.setTitle("Moppa Customer API");
 
       final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, createApp());
 

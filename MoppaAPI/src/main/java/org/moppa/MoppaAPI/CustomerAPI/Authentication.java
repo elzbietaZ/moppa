@@ -15,22 +15,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.moppa.MoppaAPI.CustomerAPI.Model.User;
 
-@Path("login")
-@Api(value = "/login", description = "Login to webpage")
+
+@Path("v1/login")
+@Api(value = "v1/login", description = "Login to webpage")
 public class Authentication {
   
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-
   @ApiOperation(value = "Login to webpage", notes = "User should be loged to use the website")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
   @ApiResponse(code = 500, message = "Something wrong in Server") })
-  public Response login() {
+  public Response login(User user) {
 
-    JsonObject value = Json.createObjectBuilder().add("login", "aaa").build();
+    JsonObject value = Json.createObjectBuilder().add("login", user.getUsername()).build();
     return Response.status(200).entity(value).build();
 
   }
