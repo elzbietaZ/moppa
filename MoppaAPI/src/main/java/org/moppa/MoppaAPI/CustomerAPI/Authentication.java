@@ -2,6 +2,7 @@ package org.moppa.MoppaAPI.CustomerAPI;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
@@ -29,7 +30,7 @@ public class Authentication {
   @ApiOperation(value = "Login to webpage", notes = "User should be loged to use the website")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
   @ApiResponse(code = 500, message = "Something wrong in Server") })
-  public Response login(User user) {
+  public Response login(@ApiParam(value = "User data")User user) {
 
     JsonObject value = Json.createObjectBuilder().add("login", user.getUsername()).build();
     return Response.status(200).entity(value).build();

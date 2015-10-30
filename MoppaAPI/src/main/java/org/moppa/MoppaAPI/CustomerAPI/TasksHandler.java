@@ -64,7 +64,7 @@ public class TasksHandler {
   public Response createTask(@ApiParam(value = "Task to create on server") Task task) {
 
     // example response
-    JsonObject value = Json.createObjectBuilder().add("Added task", "some id").build();
+    JsonObject value = Json.createObjectBuilder().add("Added task", "54").build();
     return Response.status(200).entity(value).build();
 
   }
