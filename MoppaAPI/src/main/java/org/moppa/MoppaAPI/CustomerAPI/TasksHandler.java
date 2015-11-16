@@ -58,7 +58,8 @@ public class TasksHandler {
   @Path("create")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Create new task", notes = "User send to the server the number to calculate")
+  @ApiOperation(value = "Create new task", 
+                notes = "User send to the server the number to calculate")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, the task was succesfuly created"),
       @ApiResponse(code = 500, message = "Something wrong in the server") })
   public Response createTask(@ApiParam(value = "Task to create on server") Task task) {

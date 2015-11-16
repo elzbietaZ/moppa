@@ -18,6 +18,9 @@ public class ServerSetup {
 
   private static final URI BASE_URI = URI.create("http://localhost:8080/MoppaCustomerAPI");
 
+  /**
+   * Server configuration.
+   */
   public static void main(String[] args) {
     try {
       BeanConfig beanConfig = new BeanConfig();
@@ -38,14 +41,14 @@ public class ServerSetup {
       Logger.getLogger(ServerSetup.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
-  
-
+  /**Creating the application.*/
   public static ResourceConfig createApp() {
     return new ResourceConfig()
         .packages(Authentication.class.getPackage().getName(), "com.wordnik.swagger.jaxrs.listing")
         .register(createMoxyJsonResolver());
   }
 
+  /**Creating a json resolver.*/
   public static ContextResolver<MoxyJsonConfig> createMoxyJsonResolver() {
     final MoxyJsonConfig moxyJsonConfig = new MoxyJsonConfig();
     Map<String, String> namespacePrefixMapper = new HashMap<String, String>(1);
