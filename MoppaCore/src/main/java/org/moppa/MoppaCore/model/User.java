@@ -1,4 +1,4 @@
-package org.moppa.MoppaAPI.CustomerAPI.Model;
+package org.moppa.MoppaCore.model;
 
 public class User {
   

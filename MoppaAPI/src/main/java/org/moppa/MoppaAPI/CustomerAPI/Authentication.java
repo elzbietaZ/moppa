@@ -1,7 +1,5 @@
 package org.moppa.MoppaAPI.CustomerAPI;
 
-import org.moppa.MoppaAPI.CustomerAPI.Model.User;
-
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -16,6 +14,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.moppa.MoppaCore.model.User;
 
 @Path("v1/login")
 @Api(value = "v1/login", description = "Login to webpage")

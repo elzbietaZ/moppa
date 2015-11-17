@@ -19,7 +19,7 @@ public static void main(String[] args) {
  
         session.save(new Employee("Ela Z",department));
         session.save(new Employee("Liana G",department));
-        session.save(new Task(500, 4));
+        session.save(new Task(502, 4));
       
         session.getTransaction().commit();
  
