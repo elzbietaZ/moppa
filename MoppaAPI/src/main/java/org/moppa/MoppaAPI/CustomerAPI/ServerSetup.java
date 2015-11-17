@@ -1,5 +1,6 @@
 package org.moppa.MoppaAPI.CustomerAPI;
 
+import org.moppa.MoppaAPI.MobileAPI.*;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class ServerSetup {
   public static ResourceConfig createApp() {
     return new ResourceConfig()
         .packages(Authentication.class.getPackage().getName(), "com.wordnik.swagger.jaxrs.listing")
+        .packages(MobileHandler.class.getPackage().getName(), "com.wordnik.swagger.jaxrs.listing")
         .register(createMoxyJsonResolver());
   }
 
