@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.moppa.MoppaCore.TaskStatusValues;
+
 @Entity
 @Table
 public class Task {
@@ -17,17 +19,18 @@ public class Task {
 	@ManyToOne
 	private User user;
 	private int nValue;
-	private int result;
-	private Status status;
-	
+	private String result;
+	private long deviceId;
+	private String status;
 	
 
 	public Task(User user, int nValue) {
 		super();
 		this.user = user;
 		this.nValue = nValue;
-		this.result = 0;
-		this.status = Status.PENDING;
+		this.deviceId = 0;
+		this.result = null;
+		this.status = TaskStatusValues.PENDING;	
 	}
 
 	public User getUser() {
@@ -35,7 +38,7 @@ public class Task {
 	}
 
 	public void setUser(User user) {
-		this.user= user;
+		this.user = user;
 	}
 
 	public long getTaskId() {
@@ -53,26 +56,28 @@ public class Task {
 	public void setnValue(int nValue) {
 		this.nValue = nValue;
 	}
-
-	public int getResult() {
+	
+	public String getResult() {
 		return result;
 	}
 
-	public void setResult(int result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 
-	public Status getStatus() {
+	public long getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(long deviceId) {
+		this.deviceId = deviceId;
+	}
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
-	
-	
-
 }
