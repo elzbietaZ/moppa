@@ -23,12 +23,13 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy="user",cascade=CascadeType.PERSIST)
-    private List<Task> tasks = new ArrayList<Task>();
-	
-	
+    private List<Task> tasks = new ArrayList<Task>();	
+
+	public User() {
+		super();
+	}
 
 	public User(String username, String password) {
-		super();
 		this.username = username;
 		this.password = password;
 	}

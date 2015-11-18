@@ -25,6 +25,10 @@ public class Task {
 	private long deviceId;
 	private Status status;
 	
+	public Task() {
+		super();
+	}
+	
 	
 	public Task(long userId, int nValue) {
 		super();
