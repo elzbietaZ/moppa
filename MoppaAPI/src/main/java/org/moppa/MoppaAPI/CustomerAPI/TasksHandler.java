@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.moppa.MoppaCore.implementation.TaskHandlerImpl;
+import org.moppa.MoppaCore.interfaces.TaskHandlerInterface;
 import org.moppa.MoppaCore.model.Task;
 
 import com.wordnik.swagger.annotations.Api;
@@ -64,8 +66,9 @@ public class TasksHandler {
       @ApiResponse(code = 500, message = "Something wrong in the server") })
   public Response createTask(@ApiParam(value = "Task to create on server") Task task) {
 
-    // example response
-    JsonObject value = Json.createObjectBuilder().add("Added task", "54").build();
+    TaskHandlerInterface taskHandler = new TaskHandlerImpl();
+    task=taskHandler.createTask(task);
+    JsonObject value = Json.createObjectBuilder().add("Added task with id", task.getTaskId()).build();
     return Response.status(200).entity(value).build();
 
   }

@@ -28,11 +28,11 @@ public class MobileHandler {
   public Response getTask() {
 
     // example response
-    JsonObject value = Json.createObjectBuilder().add("taskId", "100500").
-    		add("status", "in progress").build();
-    return Response.status(200).entity(value).build();   
+    JsonObject value = Json.createObjectBuilder().add("taskId", "100500")
+        .add("status", "in progress").build();
+    return Response.status(200).entity(value).build();
   }
-  
+
   @POST
   @Path("saveResultTask")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -40,7 +40,7 @@ public class MobileHandler {
   @ApiOperation(value = "Save result of the task after calculation")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, result was got"),
       @ApiResponse(code = 500, message = "Something wrong in the server") })
-  public Response saveResultTask( String result) {
+  public Response saveResultTask(String result) {
 
     // example response
     JsonObject value = Json.createObjectBuilder().add("result", "120").build();

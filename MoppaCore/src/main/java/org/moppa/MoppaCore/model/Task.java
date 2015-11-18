@@ -6,6 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.Session;
+import org.moppa.MoppaCore.HibernateUtil;
+
 @Entity
 @Table
 public class Task {
@@ -20,7 +23,14 @@ public class Task {
 	private int result;
 	private Status status;
 	
-	
+	public Task(long userId, int nValue) {
+		super();
+		Session session = HibernateUtil.getSessionFactory().openSession();		
+		this.user = (User) session.get(User.class, userId);
+		this.nValue = nValue;
+		this.result = 0;
+		this.status = Status.PENDING;
+	}
 
 	public Task(User user, int nValue) {
 		super();
