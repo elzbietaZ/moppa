@@ -23,7 +23,8 @@
 		<mapping class="org.moppa.MoppaCore.examples.Employee" />
 		<mapping class="org.moppa.MoppaCore.examples.Department" />
 		<mapping class="org.moppa.MoppaCore.model.Task" />
-		
+		<mapping class="org.moppa.MoppaCore.model.User" />
+
 
 	</session-factory>
 </hibernate-configuration>

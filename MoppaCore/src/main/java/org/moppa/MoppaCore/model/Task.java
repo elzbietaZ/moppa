@@ -3,6 +3,7 @@ package org.moppa.MoppaCore.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,23 +13,29 @@ public class Task {
 	@Id
 	@GeneratedValue
 	private long taskId;
-	private long userId;
+	
+	@ManyToOne
+	private User user;
 	private int nValue;
+	private int result;
+	private Status status;
 	
 	
 
-	public Task(long userId, int nValue) {
+	public Task(User user, int nValue) {
 		super();
-		this.userId = userId;
+		this.user = user;
 		this.nValue = nValue;
+		this.result = 0;
+		this.status = Status.PENDING;
 	}
 
-	public long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user= user;
 	}
 
 	public long getTaskId() {
@@ -46,6 +53,25 @@ public class Task {
 	public void setnValue(int nValue) {
 		this.nValue = nValue;
 	}
+
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	
+	
 	
 	
 

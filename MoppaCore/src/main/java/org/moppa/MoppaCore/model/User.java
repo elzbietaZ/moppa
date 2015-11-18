@@ -1,34 +1,60 @@
 package org.moppa.MoppaCore.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.moppa.MoppaCore.examples.Employee;
+
+@Entity
+@Table
 public class User {
-  
-  private long id;
-  private String username;
-  private String password;
-  
-  
-  public String getPassword() {
-    return password;
-  }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	@Id
+	@GeneratedValue
+	private long userId;
+	private String username;
+	private String password;
+	
+	@OneToMany(mappedBy="user",cascade=CascadeType.PERSIST)
+    private List<Task> tasks = new ArrayList<Task>();
+	
+	
 
-  public long getId() {
-    return id;
-  }
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
 
-  public void setId(long id) {
-    this.id = id;
-  }
+	public String getPassword() {
+		return password;
+	}
 
-   public String getUsername() {
-    return username;
-  }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long id) {
+		this.userId = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 }

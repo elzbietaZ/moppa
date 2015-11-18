@@ -29,7 +29,7 @@ public class TasksHandler {
   @ApiOperation(value = "Get the task")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 500, message = "Something wrong in server") })
-  public Response getTask(@ApiParam(value = "ID of the task") @PathParam("taskId") String taskId) {
+  public Response getTask(@ApiParam(value = "ID of the task") @PathParam("taskId") int taskId) {
 
     // example response
     JsonObject value = Json.createObjectBuilder().add("taskId", taskId).add("status", "in progress")
