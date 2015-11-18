@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.Session;
 import org.moppa.MoppaCore.HibernateUtil;
 
+
 @Entity
 @Table
 public class Task {
@@ -21,7 +22,9 @@ public class Task {
 	private User user;
 	private int nValue;
 	private int result;
+	private long deviceId;
 	private Status status;
+	
 	
 	public Task(long userId, int nValue) {
 		super();
@@ -36,8 +39,9 @@ public class Task {
 		super();
 		this.user = user;
 		this.nValue = nValue;
+		this.deviceId = 0;
 		this.result = 0;
-		this.status = Status.PENDING;
+		this.status = Status.PENDING;	
 	}
 
 	public User getUser() {
@@ -45,7 +49,7 @@ public class Task {
 	}
 
 	public void setUser(User user) {
-		this.user= user;
+		this.user = user;
 	}
 
 	public long getTaskId() {
@@ -63,13 +67,21 @@ public class Task {
 	public void setnValue(int nValue) {
 		this.nValue = nValue;
 	}
-
+	
 	public int getResult() {
 		return result;
 	}
 
 	public void setResult(int result) {
 		this.result = result;
+	}
+
+	public long getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(long deviceId) {
+		this.deviceId = deviceId;
 	}
 
 	public Status getStatus() {
@@ -79,10 +91,4 @@ public class Task {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
-	
-	
-	
-	
-
 }
