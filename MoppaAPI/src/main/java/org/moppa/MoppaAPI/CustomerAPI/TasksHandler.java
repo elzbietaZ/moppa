@@ -36,7 +36,7 @@ public class TasksHandler {
   @ApiOperation(value = "Get the task")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "No task with given id"),
-      @ApiResponse(code = 404, message = "Malformed method call"),
+      @ApiResponse(code = 404, message = "Unallowed parameters for request"),
       @ApiResponse(code = 500, message = "Something wrong in server") })
   public Response getTask(@ApiParam(value = "Id of the task") @PathParam("taskId") long taskId) {
 
@@ -57,7 +57,8 @@ public class TasksHandler {
   @Path("user/{userId}")
   @ApiOperation(value = "Get all the tasks for the user")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
-      @ApiResponse(code = 400, message = "Bad request parameters"),
+      @ApiResponse(code = 400, message = "Bad parameters of request"),
+      @ApiResponse(code = 404, message = "Unallowed parameters for request"),
       @ApiResponse(code = 500, message = "Something wrong in server") })
   public Response getUserTasks(
       @ApiParam(value = "ID of the user") @PathParam("userId") long userId) {

@@ -86,7 +86,7 @@ public class TaskHandlerTest extends JerseyTest {
     Assert.assertEquals(400, responseForTaskWithMalformedN.getStatus());
 
   }
-  
+
   @Test
   public void shouldNotCreateTheTaskBecauseOfUserId() {
     Entity<Task> taskEntityWithBadUserId = Entity.entity(incorrectTaskWithBadUserId,
@@ -94,11 +94,11 @@ public class TaskHandlerTest extends JerseyTest {
     Response responseForTaskWithBadUserId = target("v1/tasks/create").request()
         .post(taskEntityWithBadUserId);
     Assert.assertEquals(400, responseForTaskWithBadUserId.getStatus());
-    
+
     JsonObject jsonWithMalformedUserId = Json.createObjectBuilder()
         .add("user", Json.createObjectBuilder().add("userId", "@@").build()).add("nValue", "5")
         .build();
-    
+
     Entity<JsonObject> taskWithMalformedUserId = Entity.entity(jsonWithMalformedUserId,
         MediaType.APPLICATION_JSON);
     Response responseForTaskWithMalformedUserId = target("v1/tasks/create").request()
@@ -109,15 +109,17 @@ public class TaskHandlerTest extends JerseyTest {
 
   @Test
   public void shouldReturnTheTasks() {
-    Response response = testedClass.getUserTasks(existingUserId);
-    System.out.println(response.getEntity().toString());
-    Assert.assertEquals(response.getStatus(), 200);
+    Response response = target("v1/tasks/user/1").request().get();
+    Assert.assertEquals(200, response.getStatus());
   }
 
   @Test
   public void shouldNotReturnTheTasks() {
-    Response response = testedClass.getUserTasks(fakeUserId);
-    Assert.assertEquals(response.getStatus(), 400);
+    Response responseNotExisting = target("v1/tasks/user/2222222").request().get();
+    Assert.assertEquals(400, responseNotExisting.getStatus());
+
+    Response responseMalformed = target("v1/tasks/user/!@&").request().get();
+    Assert.assertEquals(404, responseMalformed.getStatus());
   }
 
 }
