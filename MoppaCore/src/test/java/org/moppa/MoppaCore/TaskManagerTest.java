@@ -69,7 +69,7 @@ public class TaskManagerTest extends TestCase
      */
     public void testSaveTaskResult()
     {
-    	boolean wasSaved = taskManager.saveTaskResult(67890, 231423);
+    	boolean wasSaved = taskManager.saveTaskResult(67890, "231423");
     	assertEquals( true , wasSaved );
     }
 }

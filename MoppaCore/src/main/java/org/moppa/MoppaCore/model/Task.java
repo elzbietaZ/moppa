@@ -21,7 +21,7 @@ public class Task {
 	@ManyToOne
 	private User user;
 	private int nValue;
-	private int result;
+	private String result;
 	private long deviceId;
 	private Status status;
 	
@@ -35,7 +35,7 @@ public class Task {
 		Session session = HibernateUtil.getSessionFactory().openSession();		
 		this.user = (User) session.get(User.class, userId);
 		this.nValue = nValue;
-		this.result = 0;
+		this.result = "?";
 		this.status = Status.PENDING;
 	}
 
@@ -44,7 +44,7 @@ public class Task {
 		this.user = user;
 		this.nValue = nValue;
 		this.deviceId = 0;
-		this.result = 0;
+		this.result = "?";
 		this.status = Status.PENDING;	
 	}
 
@@ -72,11 +72,11 @@ public class Task {
 		this.nValue = nValue;
 	}
 	
-	public int getResult() {
+	public String getResult() {
 		return result;
 	}
 
-	public void setResult(int result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 

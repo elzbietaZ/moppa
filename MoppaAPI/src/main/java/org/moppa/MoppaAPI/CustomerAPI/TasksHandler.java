@@ -32,8 +32,7 @@ public class TasksHandler {
   @Produces(MediaType.APPLICATION_JSON)
   @Path("{taskId}")
   @ApiOperation(value = "Get the task")
-  @ApiResponses(value = { 
-      @ApiResponse(code = 200, message = "OK"),
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 400, message = "No task with given id"),
       @ApiResponse(code = 500, message = "Something wrong in server") })
   public Response getTask(@ApiParam(value = "Id of the task") @PathParam("taskId") long taskId) {
@@ -71,7 +70,8 @@ public class TasksHandler {
   @Path("create")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Create new task", notes = "User send to the server the number to calculate")
+  @ApiOperation(value = "Create new task", 
+                notes = "User send to the server the number to calculate")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, the task was succesfuly created"),
       @ApiResponse(code = 500, message = "Something wrong in the server"),
       @ApiResponse(code = 400, message = "Bad parameters of request") })

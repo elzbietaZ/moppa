@@ -43,7 +43,7 @@ public class TaskManagerMock implements TaskManager {
     		return null;
     }
     
-    public boolean saveTaskResult(long deviceId, int result) {
+    public boolean saveTaskResult(long deviceId, String result) {
     	/*
     	 * When we will have DB, here we should find task with given deviceId 
     	 * and change status and result.
