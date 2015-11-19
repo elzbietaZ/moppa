@@ -21,18 +21,30 @@ public class MobileHandler {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("getTask")
-  @ApiOperation(value = "Get the task")
+  @Path("retrieveTask")
+  @ApiOperation(value = "Retrieve the task")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 500, message = "Something wrong in server") })
-  public Response getTask() {
+  public Response retrieveTask() {
 
     // example response
     JsonObject value = Json.createObjectBuilder().add("taskId", "100500")
         .add("status", "in progress").build();
     return Response.status(200).entity(value).build();
   }
-
+  
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("test")
+  @ApiOperation(value = "Retrieve the task")
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
+      @ApiResponse(code = 500, message = "Something wrong in server") })
+  public Response test() {
+    return Response.status(200).entity("ok").build();
+  }
+  
+  //http://stackoverflow.com/questions/20773123/jersey-test-framework-2-5-test-post-method
+  //Task(null, 5)
   @POST
   @Path("saveResultTask")
   @Consumes(MediaType.APPLICATION_JSON)
