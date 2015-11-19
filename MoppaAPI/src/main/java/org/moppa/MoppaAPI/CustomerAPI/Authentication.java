@@ -35,7 +35,7 @@ public class Authentication {
       @ApiResponse(code = 500, message = "Something wrong in Server") })
   public Response login(@ApiParam(value = "username") User user) {
 
-    //User user = authentication.login(username, password);
+    user = authentication.login(user.getUsername(), user.getPassword());
 
     if (user != null) {
       JsonObject value = Json.createObjectBuilder().add("login", user.getUsername()).build();
