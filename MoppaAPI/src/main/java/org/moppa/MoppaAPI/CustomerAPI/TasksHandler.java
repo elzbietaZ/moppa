@@ -1,5 +1,7 @@
 package org.moppa.MoppaAPI.CustomerAPI;
 
+import java.util.List;
+
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
@@ -54,24 +56,30 @@ public class TasksHandler {
   @Path("user/{userId}")
   @ApiOperation(value = "Get all the tasks for the user")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
+      @ApiResponse(code = 400, message = "Bad request parameters"),
       @ApiResponse(code = 500, message = "Something wrong in server") })
   public Response getUserTasks(
-      @ApiParam(value = "ID of the user") @PathParam("userId") String userId) {
+      @ApiParam(value = "ID of the user") @PathParam("userId") long userId) {
 
-    // example response
-    JsonObject value = Json.createObjectBuilder()
-        .add("tasks",
-            Json.createObjectBuilder().add("taskId", 54).add("status", "done").add("result", "24"))
-        .build();
-    return Response.status(Status.OK).entity(value).build();
+    List<Task> taskslist = taskHandler.getUserTasks(userId);
+
+    if (taskslist != null) {
+      JsonObject value = Json.createObjectBuilder().add("tasks",
+          Json.createObjectBuilder().add("taskId", 54).add("status", "done").add("result", "24"))
+          .build();
+      System.out.println(taskslist.toString());
+      return Response.status(Status.OK).entity(value).build();
+    } else {
+      return Response.status(Status.BAD_REQUEST).build();
+    }
+
   }
 
   @POST
   @Path("create")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Create new task", 
-                notes = "User send to the server the number to calculate")
+  @ApiOperation(value = "Create new task", notes = "User send to the server the number to calculate")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, the task was succesfuly created"),
       @ApiResponse(code = 500, message = "Something wrong in the server"),
       @ApiResponse(code = 400, message = "Bad parameters of request") })

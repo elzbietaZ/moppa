@@ -15,6 +15,7 @@ public class TaskHandlerTest {
   public static final int incorrectNValue = 150;
   public static final int incorrectMinusNValue = -5;
   public static final long existingUserId = 1;
+  public static final long fakeUserId = 151900;
   public static final Task correctTask = new Task(existingUserId, correctNValue);
   public static final Task minCorrectTask = new Task(existingUserId, 1);
   public static final Task maxCorrectTask = new Task(existingUserId, 100);
@@ -51,6 +52,19 @@ public class TaskHandlerTest {
 
     Assert.assertEquals(responseForTaskWithMinusN.getStatus(), 400);
     Assert.assertEquals(responseForTaskWithTooBigN.getStatus(), 400);
+  }
+
+  @Test
+  public void shouldReturnTheTasks() {
+    Response response = testedClass.getUserTasks(existingUserId);
+    System.out.println(response.getEntity().toString());
+    Assert.assertEquals(response.getStatus(), 200);
+  }
+  
+  @Test
+  public void shouldNotReturnTheTasks() {
+    Response response = testedClass.getUserTasks(fakeUserId);
+    Assert.assertEquals(response.getStatus(), 400);
   }
 
 }
