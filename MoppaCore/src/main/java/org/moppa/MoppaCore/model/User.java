@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.moppa.MoppaCore.examples.Employee;
-
 @Entity
 @Table
 public class User {

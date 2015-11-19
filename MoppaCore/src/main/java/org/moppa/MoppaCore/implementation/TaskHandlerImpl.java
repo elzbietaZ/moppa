@@ -18,11 +18,16 @@ public class TaskHandlerImpl implements TaskHandlerInterface {
 		if (task.getnValue() < 1 || task.getnValue() > 100) {
 			return false;
 		}
+		if (task.getUser() == null || task.getUser().getUserId() == 0) {
+			return false;
+		}
+
 		return true;
 	}
 
 	public Task createTask(Task task) {
 
+		task = new Task(task.getUser(), task.getnValue());
 		session.beginTransaction();
 		session.save(task);
 		session.getTransaction().commit();

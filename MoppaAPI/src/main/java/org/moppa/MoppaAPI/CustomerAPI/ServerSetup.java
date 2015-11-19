@@ -46,6 +46,7 @@ public class ServerSetup {
   public static ResourceConfig createApp() {
     return new ResourceConfig()
         .packages(Authentication.class.getPackage().getName(), "com.wordnik.swagger.jaxrs.listing")
+        .packages(TasksHandler.class.getPackage().getName(), "com.wordnik.swagger.jaxrs.listing")
         .packages(MobileHandler.class.getPackage().getName(), "com.wordnik.swagger.jaxrs.listing")
         .register(createMoxyJsonResolver());
   }
