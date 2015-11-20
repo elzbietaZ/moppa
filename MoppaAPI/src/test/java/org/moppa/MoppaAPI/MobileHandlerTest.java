@@ -32,7 +32,7 @@ public class MobileHandlerTest extends JerseyTest {
     @Test
     public void retrieveTaskWithValidDeviceId() {
         final Response response = target("v1/tasks/retrieveTask")
-        		.queryParam("deviceId", 100500)
+        		.queryParam("deviceId", correctDeviceId)
         		.request(MediaType.APPLICATION_JSON_TYPE)
         		.get();
         assertEquals(response.getStatus(), 200);

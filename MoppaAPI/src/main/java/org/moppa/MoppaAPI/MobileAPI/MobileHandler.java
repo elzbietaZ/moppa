@@ -52,7 +52,6 @@ public class MobileHandler {
 	System.out.println("deviceId " + deviceId);
 	System.out.println("result " + result);
 	if ( !result.equals("") && deviceId > 0 ) {
-	    // example response
 	    JsonObject value = Json.createObjectBuilder().add("result", "120").add("deviceId", 100500).build();
 	    return Response.status(200).entity(value).build();
 	} else {
