@@ -4,8 +4,6 @@ import org.junit.Test;
 import org.moppa.MoppaAPI.CustomerAPI.TasksHandler;
 import org.moppa.MoppaCore.model.Task;
 
-import com.sun.jersey.api.client.ClientResponse.Status;
-
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
