@@ -18,31 +18,32 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class ServerSetup {
 
   private static final URI BASE_URI = URI.create("http://localhost:8080/MoppaCustomerAPI");
+  private static HttpServer server;
+
+  public static void runTheServer() {
+    server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, createApp());
+    stopTheServer();
+  }
+
+  public static void stopTheServer() {
+    System.out.println(String.format("Application started.%nHit enter to stop it..."));
+    try {
+      System.in.read();
+    } catch (IOException ex) {
+      Logger.getLogger(ServerSetup.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    server.shutdownNow();
+    System.exit(0);
+  }
 
   /**
    * Server configuration.
    */
   public static void main(String[] args) {
-    try {
-      BeanConfig beanConfig = new BeanConfig();
-      beanConfig.setVersion("1.0");
-      beanConfig.setScan(true);
-      beanConfig.setResourcePackage(Authentication.class.getPackage().getName());
-      beanConfig.setBasePath(BASE_URI.toString());
-      beanConfig.setDescription("Tasks resources");
-      beanConfig.setTitle("Moppa Customer API");
-
-      final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, createApp());
-
-      System.out.println(String.format("Application started.%nHit enter to stop it..."));
-      System.in.read();
-      server.shutdownNow();
-      System.exit(0);
-    } catch (IOException ex) {
-      Logger.getLogger(ServerSetup.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    runTheServer();
   }
-  /**Creating the application.*/
+
+  /** Creating the application. */
   public static ResourceConfig createApp() {
     return new ResourceConfig()
         .packages(Authentication.class.getPackage().getName(), "com.wordnik.swagger.jaxrs.listing")
@@ -51,7 +52,7 @@ public class ServerSetup {
         .register(createMoxyJsonResolver());
   }
 
-  /**Creating a json resolver.*/
+  /** Creating a json resolver. */
   public static ContextResolver<MoxyJsonConfig> createMoxyJsonResolver() {
     final MoxyJsonConfig moxyJsonConfig = new MoxyJsonConfig();
     Map<String, String> namespacePrefixMapper = new HashMap<String, String>(1);
