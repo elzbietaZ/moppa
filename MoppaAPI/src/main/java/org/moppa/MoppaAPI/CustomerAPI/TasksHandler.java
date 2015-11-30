@@ -1,8 +1,11 @@
 package org.moppa.MoppaAPI.CustomerAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -66,11 +69,23 @@ public class TasksHandler {
     List<Task> taskslist = taskHandler.getUserTasks(userId);
 
     if (taskslist != null) {
-      JsonObject value = Json.createObjectBuilder().add("tasks",
-          Json.createObjectBuilder().add("taskId", 54).add("status", "done").add("result", "24"))
-          .build();
-      System.out.println(taskslist.toString());
-      return Response.status(Status.OK).entity(value).build();
+
+      JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+
+      for (Task task : taskslist) {
+        JsonObject taskValue = Json.createObjectBuilder()
+            .add("taskId", task.getTaskId())
+            .add("userId", task.getUser().getUserId())
+            .add("nValue", task.getnValue())
+            .add("result", task.getResult())
+            .add("deviceId", task.getDeviceId())
+            .add("status", task.getStatus().toString()).build();
+        arrayBuilder.add(taskValue);
+      }
+
+      JsonObject jsonObject = Json.createObjectBuilder().add("tasks", arrayBuilder).build();
+
+      return Response.status(Status.OK).entity(jsonObject).build();
     } else {
       return Response.status(Status.BAD_REQUEST).build();
     }
@@ -82,8 +97,7 @@ public class TasksHandler {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @ApiOperation(value = "Create new task", notes = "User send to the server the number to calculate")
-  @ApiResponses(value = { 
-      @ApiResponse(code = 200, message = "OK, the task was succesfuly created"),
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, the task was succesfuly created"),
       @ApiResponse(code = 500, message = "Something wrong in the server"),
       @ApiResponse(code = 400, message = "Bad parameters of request") })
   public Response createTask(@ApiParam(value = "Task to create on server") Task task) {

@@ -27,18 +27,19 @@ public class MobileHandler {
   @Path("retrieveTask")
   @ApiOperation(value = "Retrieve the task")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, the task was got"),
-      @ApiResponse(code = 400, message = "Invalid value of deviceId")})
-  public Response retrieveTask(@ApiParam(value = "Id of device") @QueryParam("deviceId") long deviceId) {
-    //deviceId should be a positive number
-	if(deviceId <= 0) {
-		return Response.status(400).build();
-	} else {
-		JsonObject value = Json.createObjectBuilder().add("taskId", "1234").add("nValue", 5)
-		        .add("deviceId", 100500).add("status", "in progress").build();
-		return Response.status(200).entity(value).build();
-	}
+      @ApiResponse(code = 400, message = "Invalid value of deviceId") })
+  public Response retrieveTask(
+      @ApiParam(value = "Id of device") @QueryParam("deviceId") long deviceId) {
+    // deviceId should be a positive nądumber
+    if (deviceId <= 0) {
+      return Response.status(400).build();
+    } else {
+      JsonObject value = Json.createObjectBuilder().add("taskId", "1234").add("nValue", 5)
+          .add("deviceId", 100500).add("status", "in progress").build();
+      return Response.status(200).entity(value).build();
+    }
   }
-  
+
   @POST
   @Path("saveResultTask/{deviceId}")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -47,16 +48,17 @@ public class MobileHandler {
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, result was got"),
       @ApiResponse(code = 500, message = "Saving was failed") })
   public Response saveResultTask(
-		  @ApiParam(value = "Id of device") @PathParam("deviceId") long deviceId,
-		  @ApiParam(value = "Result of task") String result) {
-	System.out.println("deviceId " + deviceId);
-	System.out.println("result " + result);
-	if ( !result.equals("") && deviceId > 0 ) {
-	    JsonObject value = Json.createObjectBuilder().add("result", "120").add("deviceId", 100500).build();
-	    return Response.status(200).entity(value).build();
-	} else {
-		return Response.status(400).build();
-	}
+      @ApiParam(value = "Id of device") @PathParam("deviceId") long deviceId,
+      @ApiParam(value = "Result of task") String result) {
+    System.out.println("deviceId " + deviceId);
+    System.out.println("result " + result);
+    if (!result.equals("") && deviceId > 0) {
+      JsonObject value = Json.createObjectBuilder().add("result", "120").add("deviceId", 100500)
+          .build();
+      return Response.status(200).entity(value).build();
+    } else {
+      return Response.status(400).build();
+    }
   }
 
 }
