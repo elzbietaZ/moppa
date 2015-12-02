@@ -2,11 +2,17 @@ package org.moppa.MoppaAPI;
 
 import org.junit.Test;
 import org.moppa.MoppaAPI.CustomerAPI.TasksHandler;
+import org.moppa.MoppaCore.HibernateUtil;
 import org.moppa.MoppaCore.model.Task;
-
+import org.moppa.MoppaCore.model.User;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
+import org.hibernate.Session;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -18,15 +24,40 @@ import javax.ws.rs.core.Response;
 public class TaskHandlerTest extends JerseyTest {
 
   TasksHandler testedClass = new TasksHandler();
+  static Session session = HibernateUtil.getSessionFactory().openSession();
   public static final int correctNValue = 5;
   public static final int incorrectNValue = 150;
-  public static final long existingUserId = 1;
   public static final long fakeUserId = 151900;
-  public static final Task correctTask = new Task(existingUserId, correctNValue);
+  public static final User goodUser = new User("gooduser", "goodpass");
+  public static final Task correctTask = new Task(goodUser, correctNValue);
+  public static final Task correctTask2 = new Task(goodUser, correctNValue + 1);
+  public static final Task correctTask3 = new Task(goodUser, correctNValue + 2);
   public static final Task incorrectTaskWithBadUserId = new Task(fakeUserId, correctNValue);
-  public static final Task minCorrectTask = new Task(existingUserId, 1);
-  public static final Task maxCorrectTask = new Task(existingUserId, 100);
-  public static final Task incorrectTaskWithTooBigN = new Task(existingUserId, incorrectNValue);
+  public static final Task minCorrectTask = new Task(goodUser, 1);
+  public static final Task maxCorrectTask = new Task(goodUser, 100);
+  public static final Task incorrectTaskWithTooBigN = new Task(goodUser, incorrectNValue);
+
+  @BeforeClass
+  public static void insertTheValuesToDatabase() {
+    session.beginTransaction();
+    session.save(goodUser);
+    session.save(correctTask);
+    session.save(correctTask2);
+    session.getTransaction().commit();
+  }
+
+  @AfterClass
+  public static void deleteTheValuesFromDatabase() {
+    session.beginTransaction();
+    session.delete(correctTask);
+    session.delete(correctTask2);
+    session.delete(correctTask3);
+    session.delete(minCorrectTask);
+    session.delete(maxCorrectTask);
+    session.getTransaction().commit();
+    session.delete(goodUser);
+
+  }
 
   @Override
   protected Application configure() {
@@ -35,8 +66,8 @@ public class TaskHandlerTest extends JerseyTest {
 
   @Test
   public void shouldReturnTheTask() {
-    Response responseForBoundary = target("v1/tasks/1").request().get();
-    Response responseForCorrect = target("v1/tasks/2").request().get();
+    Response responseForBoundary = target("v1/tasks/" + correctTask.getTaskId()).request().get();
+    Response responseForCorrect = target("v1/tasks/" + correctTask2.getTaskId()).request().get();
     Assert.assertEquals(200, responseForBoundary.getStatus());
     Assert.assertEquals(200, responseForCorrect.getStatus());
   }
@@ -52,7 +83,7 @@ public class TaskHandlerTest extends JerseyTest {
 
   @Test
   public void shouldCreateTheTask() {
-    Entity<Task> taskEntity = Entity.entity(correctTask, MediaType.APPLICATION_JSON);
+    Entity<Task> taskEntity = Entity.entity(correctTask3, MediaType.APPLICATION_JSON);
     Response response = target("v1/tasks/create").request().post(taskEntity);
     Assert.assertEquals(200, response.getStatus());
 
@@ -107,7 +138,7 @@ public class TaskHandlerTest extends JerseyTest {
 
   @Test
   public void shouldReturnTheTasks() {
-    Response response = target("v1/tasks/user/1").request().get();
+    Response response = target("v1/tasks/user/" + goodUser.getUserId()).request().get();
     Assert.assertEquals(200, response.getStatus());
   }
 
