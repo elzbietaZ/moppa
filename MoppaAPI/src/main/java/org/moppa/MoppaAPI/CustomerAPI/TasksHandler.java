@@ -45,10 +45,11 @@ public class TasksHandler {
 
     Task task = taskHandler.getTask(taskId);
     if (task != null) {
+      JsonObject userValue = Json.createObjectBuilder().add("userId", task.getUser().getUserId())
+          .build();
       JsonObject value = Json.createObjectBuilder().add("taskId", task.getTaskId())
-          .add("userId", task.getUser().getUserId()).add("nValue", task.getnValue())
-          .add("result", task.getResult()).add("status", task.getStatus().toString())
-          .add("deviceId", task.getDeviceId()).build();
+          .add("user", userValue).add("nValue", task.getnValue()).add("result", task.getResult())
+          .add("status", task.getStatus().toString()).add("deviceId", task.getDeviceId()).build();
       return Response.status(Status.OK).entity(value).build();
     } else {
       return Response.status(Status.BAD_REQUEST).build();
@@ -73,12 +74,9 @@ public class TasksHandler {
       JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 
       for (Task task : taskslist) {
-        JsonObject taskValue = Json.createObjectBuilder()
-            .add("taskId", task.getTaskId())
-            .add("userId", task.getUser().getUserId())
-            .add("nValue", task.getnValue())
-            .add("result", task.getResult())
-            .add("deviceId", task.getDeviceId())
+        JsonObject taskValue = Json.createObjectBuilder().add("taskId", task.getTaskId())
+            .add("userId", task.getUser().getUserId()).add("nValue", task.getnValue())
+            .add("result", task.getResult()).add("deviceId", task.getDeviceId())
             .add("status", task.getStatus().toString()).build();
         arrayBuilder.add(taskValue);
       }
