@@ -34,7 +34,7 @@
     <button ng-click="getTasksForUser()">Get tasks for user</button>
     {{openSessionStatus}}
 
-    <table>
+    <table ng-table="tasksTable">
         <th>Status</th>
         <th>n value</th>
         <th>Result</th>

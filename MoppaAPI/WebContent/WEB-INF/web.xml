@@ -1,0 +1,5 @@
+<servlet>
+	<servlet-name>SwaggerBootstrap</servlet-name>
+	<servlet-class>io.swagger.api.util.Bootstrap</servlet-class>
+	<load-on-startup>2</load-on-startup>
+</servlet>

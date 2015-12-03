@@ -37,10 +37,19 @@ public class TaskHandlerIntegrationTest extends JerseyTest {
     session.save(task);
     session.getTransaction().commit();
   }
+  
+  @After
+  public void removeTheValuesFromDatabase() {
+    session.beginTransaction();
+    session.delete(task);
+    session.delete(user);
+    session.getTransaction().commit();
+  }
+
 
   @Test
   public void shouldReturnTheTask() {
-    Response response = target("v1/tasks/"+task.getTaskId()).request().get();
+    Response response = target("v1/tasks/" + task.getTaskId()).request().get();
     Task entity = response.readEntity(Task.class);
     Assert.assertEquals(task.getTaskId(), entity.getTaskId());
     Assert.assertEquals(user.getUserId(), entity.getUser().getUserId());
@@ -50,12 +59,5 @@ public class TaskHandlerIntegrationTest extends JerseyTest {
 
   }
 
-  @After
-  public void removeTheValuesFromDatabase() {
-    session.beginTransaction();
-    session.delete(task);
-    session.delete(user);
-    session.getTransaction().commit();
-  }
-
+  
 }
