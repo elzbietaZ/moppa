@@ -6,6 +6,6 @@ public interface TaskManager {
 	
 	public Task createTask(Integer n, long userId);
     public Task checkTask(long taskId);
-    public Task tryGetTask(long deviceId);
-    public boolean saveTaskResult(long deviceId, String result);
+    public Task tryGetTask(String deviceId);
+    public boolean saveTaskResult(String deviceId, String result);
 }

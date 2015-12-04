@@ -18,8 +18,8 @@ public class MobileHandlerTest extends JerseyTest {
 
   MobileHandler testedClass = new MobileHandler();
   public static final int correctNValue = 5;
-  public static final long correctDeviceId = 100500;
-  public static final long incorrectDeviceId = -100500;
+  public static final String correctDeviceId = "100500";
+  public static final String incorrectDeviceId = "";
   public static final String correctResult = "12312321321321";
   public static final String incorrectResult = "";
   public static final Task correctTask = new Task(12, correctNValue);

@@ -22,7 +22,7 @@ public class Task {
 	private User user;
 	private int nValue;
 	private String result;
-	private long deviceId;
+	private String deviceId;
 	private Status status;
 	
 	public Task() {
@@ -43,7 +43,7 @@ public class Task {
 		super();
 		this.user = user;
 		this.nValue = nValue;
-		this.deviceId = 0;
+		this.deviceId = "";
 		this.result = "?";
 		this.status = Status.PENDING;	
 	}
@@ -80,11 +80,11 @@ public class Task {
 		this.result = result;
 	}
 
-	public long getDeviceId() {
+	public String getDeviceId() {
 		return deviceId;
 	}
 
-	public void setDeviceId(long deviceId) {
+	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
 

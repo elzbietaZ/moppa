@@ -57,10 +57,10 @@ public class TaskManagerTest extends TestCase
      */
     public void testTryGetTask()
     {
-    	Task task = taskManager.tryGetTask(67890);
+    	Task task = taskManager.tryGetTask("67890");
     	if (task != null) {
     		//now status should change to "in progress", deviceId to given value or return NULL
-    		assertEquals( 67890, task.getDeviceId() );
+    		assertEquals( "67890", task.getDeviceId() );
     	}
     }
     
@@ -69,7 +69,7 @@ public class TaskManagerTest extends TestCase
      */
     public void testSaveTaskResult()
     {
-    	boolean wasSaved = taskManager.saveTaskResult(67890, "231423");
+    	boolean wasSaved = taskManager.saveTaskResult("67890", "231423");
     	assertEquals( true , wasSaved );
     }
 }
