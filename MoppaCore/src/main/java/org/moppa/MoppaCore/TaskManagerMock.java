@@ -31,7 +31,7 @@ public class TaskManagerMock implements TaskManager {
     	return task;
     }
     
-    public Task tryGetTask(long deviceId) {
+    public Task tryGetTask(String deviceId) {
     	Task task = new Task(1, 2);
     	
     	if (randInt(0,1) == 0) {
@@ -43,7 +43,7 @@ public class TaskManagerMock implements TaskManager {
     		return null;
     }
     
-    public boolean saveTaskResult(long deviceId, String result) {
+    public boolean saveTaskResult(String deviceId, String result) {
     	/*
     	 * When we will have DB, here we should find task with given deviceId 
     	 * and change status and result.

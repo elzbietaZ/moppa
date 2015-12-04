@@ -18,6 +18,10 @@ import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
+//for deviceId
+//import android.provider.Settings.Secure;
+//private String android_id = Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID); 
+
 @Path("v1/tasks")
 @Api(value = "v1/tasks", description = "Handle with tasks")
 public class MobileHandler {
@@ -29,13 +33,13 @@ public class MobileHandler {
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, the task was got"),
       @ApiResponse(code = 400, message = "Invalid value of deviceId") })
   public Response retrieveTask(
-      @ApiParam(value = "Id of device") @QueryParam("deviceId") long deviceId) {
-    // deviceId should be a positive nądumber
-    if (deviceId <= 0) {
+      @ApiParam(value = "Id of device") @QueryParam("deviceId") String deviceId) {
+    // deviceId should be a positive number
+    if  ( deviceId.equals("") ) {
       return Response.status(400).build();
     } else {
       JsonObject value = Json.createObjectBuilder().add("taskId", "1234").add("nValue", 5)
-          .add("deviceId", 100500).add("status", "in progress").build();
+          .add("deviceId", "100500").add("status", "in progress").build();
       return Response.status(200).entity(value).build();
     }
   }
@@ -48,12 +52,10 @@ public class MobileHandler {
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, result was got"),
       @ApiResponse(code = 500, message = "Saving was failed") })
   public Response saveResultTask(
-      @ApiParam(value = "Id of device") @PathParam("deviceId") long deviceId,
+      @ApiParam(value = "Id of device") @PathParam("deviceId") String deviceId,
       @ApiParam(value = "Result of task") String result) {
-    System.out.println("deviceId " + deviceId);
-    System.out.println("result " + result);
-    if (!result.equals("") && deviceId > 0) {
-      JsonObject value = Json.createObjectBuilder().add("result", "120").add("deviceId", 100500)
+    if (!result.equals("") && !deviceId.equals("") ) {
+      JsonObject value = Json.createObjectBuilder().add("result", "120").add("deviceId", "100500")
           .build();
       return Response.status(200).entity(value).build();
     } else {
