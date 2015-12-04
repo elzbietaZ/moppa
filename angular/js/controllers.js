@@ -37,8 +37,8 @@ angular.module('SQA2014.controllers', [])
                                                    		  "nValue": $scope.nValue
                                                  }
 
-                            $scope.openSessionData = "";
-                            $scope.openSessionStatus = "Creating the task...";
+                            $scope.createTaskData = "";
+                            $scope.createTaskStatus = "Creating the task...";
 
                             $http({
                                 method: 'POST',
@@ -46,18 +46,17 @@ angular.module('SQA2014.controllers', [])
                                 data: jsonTask
                             }).
                             success(function(data, status, headers, config) {
-                                $scope.openSessionData = data;
-                                $scope.openSessionStatus = "Ok";
+                                $scope.createTaskData = data;
+                                $scope.createTaskStatus = "Ok";
                             }).
                             error(function(data, status, headers, config) {
-                                $scope.openSessionData = status;
-                                $scope.openSessionStatus = "Error";
+                                $scope.createTaskData = status;
+                                $scope.createTaskStatus = "Error";
                             });
                         }
 
         $scope.getTasksForUser = function() {
-                            $scope.openSessionData = "";
-                            $scope.allTasks = "";
+                            $scope.allTasks = {array: []};
                             $scope.openSessionStatus = "Getting the task...";
 
                             $http({
@@ -65,13 +64,14 @@ angular.module('SQA2014.controllers', [])
                                 url: 'http://localhost:8080/MoppaCustomerAPI/v1/tasks/user/1'
                             }).
                             success(function(data, status, headers, config) {
-                                $scope.allTasks = data;
+                                $scope.allTasks.array = data;
                                 $scope.openSessionStatus = "Ok, tasks retreived";
                             }).
                             error(function(data, status, headers, config) {
-                                $scope.openSessionData = status;
+                                $scope.allTasks = status;
                                 $scope.openSessionStatus = "Error";
                             });
+
                         }
 
 

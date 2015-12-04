@@ -102,7 +102,7 @@ public class TasksHandler {
 
     if (taskHandler.isTaskValid(task)) {
       task = taskHandler.createTask(task);
-      JsonObject value = Json.createObjectBuilder().add("Added task with id", task.getTaskId())
+      JsonObject value = Json.createObjectBuilder().add("taskId", task.getTaskId())
           .build();
       return Response.status(Status.OK).entity(value).build();
     } else {

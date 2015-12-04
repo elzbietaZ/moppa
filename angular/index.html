@@ -24,12 +24,10 @@
     <input type="text" data-ng-model="nValue">
 
     <button ng-click="createTask()">Create task</button>
-    {{openSessionData}}
-    {{openSessionStatus}}
+    {{createTaskData}}
+    {{createTaskStatus}}
 
-</div>
-
-<div ng-controller="controller">
+    <br>  </br>
 
     <button ng-click="getTasksForUser()">Get tasks for user</button>
     {{openSessionStatus}}
@@ -38,7 +36,7 @@
         <th>Status</th>
         <th>n value</th>
         <th>Result</th>
-        <tr ng-repeat="x in allTasks.tasks">
+        <tr ng-repeat="x in allTasks.array.tasks">
             <td>{{ x.status }}</td>
             <td>{{ x.nValue }}</td>
             <td>{{ x.result }}</td>
