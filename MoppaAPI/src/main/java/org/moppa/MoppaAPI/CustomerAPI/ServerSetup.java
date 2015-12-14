@@ -21,6 +21,13 @@ public class ServerSetup {
   private static HttpServer server;
 
   public static void runTheServer() {
+    BeanConfig beanConfig = new BeanConfig();
+    beanConfig.setVersion("1.0");
+    beanConfig.setScan(true);
+    beanConfig.setResourcePackage(Authentication.class.getPackage().getName());
+    beanConfig.setBasePath(BASE_URI.toString());
+    beanConfig.setDescription("MoppaAPI");
+    beanConfig.setTitle("Moppa API");
     server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, createApp());
     stopTheServer();
   }
