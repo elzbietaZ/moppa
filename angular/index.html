@@ -9,33 +9,36 @@
     <script src="js/controllers.js"></script>
 </head>
 <body>
+<h1>
+    Moppa customer panel
+</h1>
 
 <div ng-controller="controller">
 
-    <button ng-click="getTask()">Get task</button>
-    {{openSessionData}}
-    {{openSessionStatus}}
+    <h2>
+        Create new task
+    </h2>
 
-</div>
-
-<div ng-controller="controller">
-
-    <br>Insert n number</br>
+    <h4>Insert n number</h4>
     <input type="text" data-ng-model="nValue">
 
     <button ng-click="createTask()">Create task</button>
-    {{createTaskData}}
     {{createTaskStatus}}
+</div>
 
-    <br>  </br>
 
+<div ng-controller="controller">
+
+<h2>
+    Tasks history
+</h2>
     <button ng-click="getTasksForUser()">Get tasks for user</button>
     {{openSessionStatus}}
 
     <table ng-table="tasksTable">
-        <th>Status</th>
-        <th>n value</th>
-        <th>Result</th>
+        <th>Task status</th>
+        <th>Number to calculate</th>
+        <th>Result (n!)</th>
         <tr ng-repeat="x in allTasks.array.tasks">
             <td>{{ x.status }}</td>
             <td>{{ x.nValue }}</td>
@@ -44,7 +47,6 @@
     </table>
 
 </div>
-
 
 </body>
 </html>

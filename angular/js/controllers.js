@@ -47,7 +47,7 @@ angular.module('SQA2014.controllers', [])
                             }).
                             success(function(data, status, headers, config) {
                                 $scope.createTaskData = data;
-                                $scope.createTaskStatus = "Ok";
+                                $scope.createTaskStatus = "Successfully created the task!";
                             }).
                             error(function(data, status, headers, config) {
                                 $scope.createTaskData = status;
