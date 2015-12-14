@@ -1,0 +1,57 @@
+<p>You're logged in!!</p>
+<p><a href="#/login">Logout</a></a></p>
+
+<h1>
+    Moppa customer panel
+</h1>
+
+<div class="panel panel-success" ng-controller="controller">
+    <div class="panel-heading">
+        <h2>
+            Create new task
+        </h2>
+    </div>
+    <div class="panel-body">
+
+        <div class="form-group">
+            <label for="nValue">Insert n number</label>
+            <i class="fa fa-key"></i>
+            <input type="text" placeholder="n value" name="nValue" id="nValue" class="form-control" ng-model="nValue" required />
+        </div>
+
+    <div>
+        <button class="btn btn-lg btn-success" ng-click="createTask()">Create task</button>
+        {{createTaskStatus}}
+    </div>
+    </div>
+
+</div>
+
+
+<div class="panel panel-success" ng-controller="controller">
+    <div class="panel-heading">
+    <h2>
+        Tasks history
+    </h2>
+        </div>
+    <div>
+        <div class="panel-body">
+
+        <button class="btn btn-lg btn-success" ng-click="getTasksForUser()">Get tasks for user</button>
+            {{openSessionStatus}}
+
+        </div>
+    <table class="table" ng-table="tasksTable">
+        <th>Task status</th>
+        <th>Number to calculate</th>
+        <th>Result (n!)</th>
+        <tr ng-repeat="x in allTasks.array.tasks">
+            <td>{{ x.status }}</td>
+            <td>{{ x.nValue }}</td>
+            <td>{{ x.result }}</td>
+        </tr>
+    </table>
+
+
+</div>
+    </div>

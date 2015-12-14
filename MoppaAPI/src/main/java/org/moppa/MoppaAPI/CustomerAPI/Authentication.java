@@ -33,12 +33,13 @@ public class Authentication {
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
       @ApiResponse(code = 401, message = "Wrong login data"),
       @ApiResponse(code = 500, message = "Something wrong in Server") })
-  public Response login(@ApiParam(value = "username") User user) {
+  public Response login(@ApiParam(value = "user") User user) {
 
     user = authentication.login(user.getUsername(), user.getPassword());
 
     if (user != null) {
-      JsonObject value = Json.createObjectBuilder().add("login", user.getUsername()).build();
+      JsonObject value = Json.createObjectBuilder().add("username", user.getUsername())
+          .add("password", user.getPassword()).build();
       return Response.status(200).entity(value).build();
     } else {
       return Response.status(Status.UNAUTHORIZED).build();
