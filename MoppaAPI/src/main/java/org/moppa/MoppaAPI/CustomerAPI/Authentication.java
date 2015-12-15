@@ -38,7 +38,8 @@ public class Authentication {
     user = authentication.login(user.getUsername(), user.getPassword());
 
     if (user != null) {
-      JsonObject value = Json.createObjectBuilder().add("username", user.getUsername())
+      JsonObject value = Json.createObjectBuilder().add("success", true)
+          .add("userId", user.getUserId()).add("username", user.getUsername())
           .add("password", user.getPassword()).build();
       return Response.status(200).entity(value).build();
     } else {

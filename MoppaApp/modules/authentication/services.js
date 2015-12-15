@@ -25,9 +25,7 @@ angular.module('Authentication')
             $http.post('http://localhost:8080/MoppaCustomerAPI/v1/login', { "username": username, "password": password })
 
                 .success(function (response) {
-                    var response = { success: username === username && password === password };
-                    callback(response);
-                    console.log("loged");
+                   callback(response);
                 })
                 .error(function (response) {
                     var response = {};
@@ -37,11 +35,12 @@ angular.module('Authentication')
 
         };
  
-        service.SetCredentials = function (username, password) {
+        service.SetCredentials = function (username, password, userId) {
             var authdata = Base64.encode(username + ':' + password);
  
             $rootScope.globals = {
                 currentUser: {
+                    userId: userId,
                     username: username,
                     authdata: authdata
                 }

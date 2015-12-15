@@ -2,7 +2,7 @@
  * 
  */
 angular.module('Home', [])
-    .controller('controller', function ($scope, $http, $interval){
+    .controller('controller', function ($rootScope,$scope, $http, $interval){
 
     	
     	$scope.testClick = function() {
@@ -32,7 +32,7 @@ angular.module('Home', [])
                              var jsonTask =
                                                  {
                                                       "user" : {
-                                                          "userId": 1
+                                                          "userId": $rootScope.globals.currentUser.userId
                                                       },
                                                    		  "nValue": $scope.nValue
                                                  }
@@ -61,7 +61,7 @@ angular.module('Home', [])
 
                             $http({
                                 method: 'GET',
-                                url: 'http://localhost:8080/MoppaCustomerAPI/v1/tasks/user/1'
+                                url: 'http://localhost:8080/MoppaCustomerAPI/v1/tasks/user/'+$rootScope.globals.currentUser.userId
                             }).
                             success(function(data, status, headers, config) {
                                 $scope.allTasks.array = data;
