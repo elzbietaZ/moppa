@@ -18,7 +18,7 @@ public class MobileHandlerTest extends JerseyTest {
 
   MobileHandler testedClass = new MobileHandler();
   public static final int correctNValue = 5;
-  public static final String correctDeviceId = "100500";
+  public static final String correctDeviceId = "1234567890123456";
   public static final String incorrectDeviceId = "";
   public static final String correctResult = "12312321321321";
   public static final String incorrectResult = "";
@@ -39,7 +39,7 @@ public class MobileHandlerTest extends JerseyTest {
   @Test
   public void retrieveTaskWithInvalidDeviceId() {
     final Response response = target("v1/tasks/retrieveTask")
-        .request(MediaType.APPLICATION_JSON_TYPE).get();
+    	.queryParam("deviceId", incorrectDeviceId).request(MediaType.APPLICATION_JSON_TYPE).get();
     assertEquals(response.getStatus(), 400);
   }
 
@@ -56,7 +56,7 @@ public class MobileHandlerTest extends JerseyTest {
     Entity<String> resultEntity = Entity.entity(correctResult, MediaType.APPLICATION_JSON);
     Response response = target("v1/tasks/saveResultTask/" + incorrectDeviceId).request()
         .post(resultEntity);
-    Assert.assertEquals(400, response.getStatus());
+    Assert.assertEquals(404, response.getStatus());
   }
 
   @Test
@@ -72,6 +72,6 @@ public class MobileHandlerTest extends JerseyTest {
     Entity<String> resultEntity = Entity.entity(incorrectResult, MediaType.APPLICATION_JSON);
     Response response = target("v1/tasks/saveResultTask/" + incorrectDeviceId).request()
         .post(resultEntity);
-    Assert.assertEquals(400, response.getStatus());
+    Assert.assertEquals(404, response.getStatus());
   }
 }
