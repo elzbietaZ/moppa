@@ -20,8 +20,8 @@ public class MobileHandlerTest extends JerseyTest {
   public static final int correctNValue = 5;
   public static final String correctDeviceId = "1234567890123456";
   public static final String incorrectDeviceId = "";
-  public static final String correctResult = "12312321321321";
-  public static final String incorrectResult = "";
+  public static final int correctResult = 123123;
+  public static final int incorrectResult = 0;
   public static final Task correctTask = new Task(12, correctNValue);
 
   @Override
@@ -45,33 +45,22 @@ public class MobileHandlerTest extends JerseyTest {
 
   @Test
   public void saveResultTaskSuccessfully() {
-    Entity<String> resultEntity = Entity.entity(correctResult, MediaType.APPLICATION_JSON);
-    Response response = target("v1/tasks/saveResultTask/" + correctDeviceId).request()
-        .post(resultEntity);
+    Entity<Integer> resultEntity = Entity.entity(correctResult, MediaType.APPLICATION_JSON);
+    Response response = target("v1/tasks/saveResultTask/" + correctDeviceId).request().post(resultEntity);
     Assert.assertEquals(200, response.getStatus());
   }
 
   @Test
-  public void saveResultTaskFailed() {
-    Entity<String> resultEntity = Entity.entity(correctResult, MediaType.APPLICATION_JSON);
-    Response response = target("v1/tasks/saveResultTask/" + incorrectDeviceId).request()
-        .post(resultEntity);
-    Assert.assertEquals(404, response.getStatus());
-  }
-
-  @Test
   public void saveResultTaskFailedBecauseResultEmpty() {
-    Entity<String> resultEntity = Entity.entity(incorrectResult, MediaType.APPLICATION_JSON);
-    Response response = target("v1/tasks/saveResultTask/" + correctDeviceId).request()
-        .post(resultEntity);
+    Entity<Integer> resultEntity = Entity.entity(incorrectResult, MediaType.APPLICATION_JSON);
+    Response response = target("v1/tasks/saveResultTask/" + correctDeviceId).request().post(resultEntity);
     Assert.assertEquals(400, response.getStatus());
   }
 
   @Test
   public void saveResultTaskFailedBecauseDeviceIdIncorrect() {
-    Entity<String> resultEntity = Entity.entity(incorrectResult, MediaType.APPLICATION_JSON);
-    Response response = target("v1/tasks/saveResultTask/" + incorrectDeviceId).request()
-        .post(resultEntity);
-    Assert.assertEquals(404, response.getStatus());
+    Entity<Integer> resultEntity = Entity.entity(correctResult, MediaType.APPLICATION_JSON);
+    Response response = target("v1/tasks/saveResultTask/" + incorrectDeviceId).request().post(resultEntity);
+    Assert.assertEquals(403, response.getStatus());
   }
 }

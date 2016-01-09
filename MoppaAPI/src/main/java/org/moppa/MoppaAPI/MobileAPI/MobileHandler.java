@@ -50,17 +50,24 @@ public class MobileHandler {
   @Produces(MediaType.APPLICATION_JSON)
   @ApiOperation(value = "Save result of the task after calculation")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "OK, result was got"),
-      @ApiResponse(code = 400, message = "Saving was failed") })
+      @ApiResponse(code = 400, message = "DeviceId is empty"),
+      @ApiResponse(code = 403, message = "Result is invalid")})
   public Response saveResultTask(
       @ApiParam(value = "Id of device") @PathParam("deviceId") String deviceId,
-      @ApiParam(value = "Result of task") String result) {
-    if ( deviceId != null && !deviceId.isEmpty() && result != null && !result.isEmpty() ) {
+      @ApiParam(value = "Result of task") int result) {
+    if ( deviceId != null && !deviceId.isEmpty() && result > 0 ) {
       JsonObject value = Json.createObjectBuilder().add("result", "120").add("deviceId", "100500")
           .build();
       return Response.status(200).entity(value).build();
-    } else {
-      return Response.status(400).build();
-    }
+    } else 
+    	if ( deviceId == null || deviceId.isEmpty() )
+	    {
+    		return Response.status(400).build();
+	    }
+    	else
+    	{
+    		return Response.status(403).build();
+    	}
   }
 //MobileHandler close
 }
