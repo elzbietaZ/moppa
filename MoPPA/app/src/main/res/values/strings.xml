@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MoPPA</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_display_message">My Message</string>
+    <string name="isCharging">Is charging</string>
+    <string name="isInternetConnected">Is Internet Connected</string>
+    <string name="isIde">Is Ide</string>
+</resources>
