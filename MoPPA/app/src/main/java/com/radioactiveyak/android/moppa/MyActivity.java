@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.content.Intent;
 
 
-
 public class MyActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
