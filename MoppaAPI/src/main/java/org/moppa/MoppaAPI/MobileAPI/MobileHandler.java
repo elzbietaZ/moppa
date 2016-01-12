@@ -52,7 +52,7 @@ public class MobileHandler {
 	}
 
 	@POST
-	@Path("saveResultTask/{deviceId}")
+	@Path("saveResultTask/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Save result of the task after calculation")
