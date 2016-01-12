@@ -1,0 +1,30 @@
+{
+  "name": "MoppaApp",
+  "namelower": "moppaapp",
+  "version": "0.0.1",
+  "description": "AngularJS Moppa",
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@git.example.com:example.git"
+  },
+  "devDependencies": {
+    "grunt": "0.4.2",
+    "grunt-contrib-concat": "0.3.0",
+    "grunt-contrib-copy": "0.5.0",
+    "grunt-contrib-jshint": "0.8.0",
+    "grunt-contrib-nodeunit": "0.3.0",
+    "grunt-contrib-uglify": "0.2.2",
+    "grunt-contrib-watch": "0.5.3",
+    "grunt-exec": "0.4.5",
+    "grunt-jsdoc": "0.5.4",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.6",
+    "phantomjs": "^1.9.19"
+  },
+  "scripts": {
+    "postinstall": "bower install"
+  }
+}
