@@ -10,5 +10,11 @@ public interface TaskHandlerInterface {
 	public boolean isTaskValid(Task task);
 	public Task getTask(long taskId);
 	public List<Task> getUserTasks(long userId);
+	
+	// for mobile application
+	public Task saveResult (Task task);
+	public Task retrieveTask (String deviceId);
+
+
 
 }

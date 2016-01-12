@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.moppa.MoppaCore.HibernateUtil;
 import org.moppa.MoppaCore.interfaces.TaskHandlerInterface;
+import org.moppa.MoppaCore.model.Status;
 import org.moppa.MoppaCore.model.Task;
 import org.moppa.MoppaCore.model.User;
 
@@ -49,6 +50,35 @@ public class TaskHandlerImpl implements TaskHandlerInterface {
 		}
 		return null;
 
+	}
+
+	// methods for mobile api
+	
+	public Task saveResult(Task task) {
+		
+		session.beginTransaction();
+		Task t= (Task) session.get(Task.class, task.getTaskId());
+		t.setResult(task.getResult());
+		t.setStatus(Status.DONE);
+		session.getTransaction().commit();
+		return t;
+		
+	}
+
+	public Task retrieveTask(String deviceId) {
+		
+		Query hqlQuery = session.createQuery("From Task where deviceId = ?");
+		List<Task> results = hqlQuery.setString(0, "").list();
+		if(results.size()>0){
+			session.beginTransaction();
+			Task task=results.get(0);
+			task.setDeviceId(deviceId);
+			session.getTransaction().commit();
+			return task;
+		}
+		else{
+			return null;
+		}
 	}
 
 }
