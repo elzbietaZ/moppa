@@ -16,13 +16,13 @@ angular.module('MoppaApp', [
     $routeProvider
         .when('/login', {
             controller: 'LoginController',
-            templateUrl: 'modules/authentication/views/login.html',
+            templateUrl: 'app/modules/authentication/views/login.html',
             hideMenus: true
         })
  
         .when('/', {
-            controller: 'controller',
-            templateUrl: 'modules/home/views/home.html'
+            controller: 'HomeController',
+            templateUrl: 'app/modules/home/views/home.html'
         })
  
         .otherwise({ redirectTo: '/login' });
