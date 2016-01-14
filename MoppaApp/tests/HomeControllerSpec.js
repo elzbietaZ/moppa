@@ -46,4 +46,30 @@
         });
 
 
+     it('Should get task correctly', inject(function($httpBackend,$http) {
+
+       $scope.getTask();
+       $httpBackend
+         .when('GET', 'http://localhost:8080/MoppaCustomerAPI/v1/tasks/1')
+         .respond(200);
+
+       $httpBackend.flush();
+       expect($scope.openSessionStatus).toBe("Ok");
+
+     }));
+
+     it('Should get task with error', inject(function($httpBackend,$http) {
+
+            $scope.getTask();
+            $httpBackend
+              .when('GET', 'http://localhost:8080/MoppaCustomerAPI/v1/tasks/1')
+              .respond(400);
+
+            $httpBackend.flush();
+            expect($scope.openSessionStatus).toBe("Error");
+
+      }));
+
+
+
 });
