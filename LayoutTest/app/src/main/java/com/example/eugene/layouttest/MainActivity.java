@@ -127,13 +127,24 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            if( PowerUtil.isConnected(getApplicationContext()) ) {
+            PowerUtil myPowerUtil = new PowerUtil(getApplicationContext());
+            if( myPowerUtil.isConnected(getApplicationContext()) && myPowerUtil.isInternetAvailable() ) {
                 alert.setBackgroundColor(Color.parseColor("#56C646"));
-                alert.setText("Online");
+                alert.setText("Online and Charging");
             } else {
                 alert.setBackgroundColor(Color.parseColor("#DB5657"));
-                alert.setText("There is no charging cable");
-                if( isOnline != PowerUtil.isConnected(getApplicationContext()) ) {
+                if ( myPowerUtil.isConnected(getApplicationContext() ) ) {
+                    if ( !myPowerUtil.isInternetAvailable() )
+                        alert.setText("There is no Internet connection and no charging");
+                    else
+                        alert.setText("There is no Internet connection");
+                }
+                else {
+                    if ( myPowerUtil.isInternetAvailable() ) {
+                        alert.setText("No charging");
+                    }
+                }
+                if( isOnline != myPowerUtil.isConnected(getApplicationContext()) ) {
                     writeToLog("...");
                 }
             }
